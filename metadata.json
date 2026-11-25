@@ -1,0 +1,6 @@
+{
+  "name": "PRIME COMPUTER ACCESSORIES",
+  "description": "Pakistan's premier destination for mechanical keyboards, wireless gaming mice, 4K monitors, headsets, SSDs, and workspace hardware in Sialkot with Cash on Delivery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

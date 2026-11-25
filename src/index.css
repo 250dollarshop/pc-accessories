@@ -1,0 +1,394 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
+    background-color: #ffffff;
+    color: #0b1220;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .dark body {
+    background-color: #070b16;
+    color: #ffffff;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: #1F5BFF;
+    color: #FFFFFF;
+  }
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F7FF;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #070B16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1F5BFF, #19C3FF);
+  border-radius: 9999px;
+}
+
+/* Subtle circuit grid pattern */
+.bg-circuit-light {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(31, 91, 255, 0.08) 1px, transparent 0),
+    linear-gradient(to right, rgba(31, 91, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 91, 255, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px, 56px 56px, 56px 56px;
+}
+
+.bg-circuit-dark {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(25, 195, 255, 0.14) 1px, transparent 0),
+    linear-gradient(to right, rgba(31, 91, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 91, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px, 56px 56px, 56px 56px;
+}
+
+/* Primary gradient shine sweep + active press-down */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.btn-shine:active {
+  transform: scale(0.97);
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn-shine:hover::after {
+  left: 140%;
+}
+
+/* Gentle hardware float */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Hero continuous orbit rings */
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbit-cw {
+  animation: orbitSpin 14s linear infinite;
+  will-change: transform;
+}
+
+.animate-orbit-ccw {
+  animation: orbitSpin 20s linear infinite reverse;
+  will-change: transform;
+}
+
+/* Product Parade & Opposite Marquee tracks */
+@keyframes marqueeLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 34s linear infinite;
+  will-change: transform;
+}
+
+.animate-parade {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 36s linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover .animate-marquee-left,
+.pause-on-hover:hover .animate-marquee-right,
+.pause-on-hover:hover .animate-parade {
+  animation-play-state: paused;
+}
+
+/* Parade item bob + gentle tilt */
+@keyframes paradeBobA {
+  0%, 100% {
+    transform: translate3d(0, 0px, 0) rotate(-2deg);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(2deg);
+  }
+}
+
+@keyframes paradeBobB {
+  0%, 100% {
+    transform: translate3d(0, -6px, 0) rotate(2deg);
+  }
+  50% {
+    transform: translate3d(0, 6px, 0) rotate(-2deg);
+  }
+}
+
+.parade-bob-a {
+  animation: paradeBobA 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.parade-bob-b {
+  animation: paradeBobB 5.1s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Shimmer for stock bar & skeleton loaders */
+@keyframes shimmerSlide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmerSlide 1.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Promo text gradient shine sweep */
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-shine {
+  background-size: 200% auto;
+  animation: textShine 5s ease-in-out infinite;
+}
+
+/* Floating WhatsApp gentle wobble every 8 seconds */
+@keyframes wobble8s {
+  0%, 82%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  85% {
+    transform: rotate(-6deg) scale(1.04);
+  }
+  88% {
+    transform: rotate(6deg) scale(1.05);
+  }
+  91% {
+    transform: rotate(-4deg) scale(1.03);
+  }
+  94% {
+    transform: rotate(3deg) scale(1.02);
+  }
+}
+
+.animate-wobble-8s {
+  animation: wobble8s 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Floating WhatsApp chat bubbles rising */
+@keyframes bubbleRise {
+  0% {
+    transform: translate3d(0, 24px, 0) scale(0.85);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.45;
+  }
+  80% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate3d(0, -110px, 0) scale(1.05);
+    opacity: 0;
+  }
+}
+
+.animate-bubble-rise {
+  animation: bubbleRise 6.5s ease-in infinite;
+  will-change: transform, opacity;
+}
+
+/* Roaming background logo watermark drift paths (GPU transform only) */
+@keyframes roamPrimary {
+  0% {
+    transform: translate3d(-10vw, -6vh, 0) rotate(-6deg);
+  }
+  25% {
+    transform: translate3d(14vw, -10vh, 0) rotate(4deg);
+  }
+  50% {
+    transform: translate3d(18vw, 10vh, 0) rotate(8deg);
+  }
+  75% {
+    transform: translate3d(-12vw, 8vh, 0) rotate(-4deg);
+  }
+  100% {
+    transform: translate3d(-10vw, -6vh, 0) rotate(-6deg);
+  }
+}
+
+@keyframes roamPrimaryMobile {
+  0% {
+    transform: translate3d(-6vw, -4vh, 0) rotate(-4deg);
+  }
+  50% {
+    transform: translate3d(8vw, 5vh, 0) rotate(5deg);
+  }
+  100% {
+    transform: translate3d(-6vw, -4vh, 0) rotate(-4deg);
+  }
+}
+
+@keyframes roamSecondary {
+  0% {
+    transform: translate3d(16vw, 12vh, 0) rotate(7deg);
+  }
+  33% {
+    transform: translate3d(-18vw, 4vh, 0) rotate(-6deg);
+  }
+  66% {
+    transform: translate3d(-10vw, -14vh, 0) rotate(4deg);
+  }
+  100% {
+    transform: translate3d(16vw, 12vh, 0) rotate(7deg);
+  }
+}
+
+.animate-roam-primary {
+  animation: roamPrimaryMobile 60s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .animate-roam-primary {
+    animation: roamPrimary 48s ease-in-out infinite;
+  }
+}
+
+.animate-roam-secondary {
+  animation: roamSecondary 54s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Hide scrollbars nicely where needed */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float-slow,
+  .animate-orbit-cw,
+  .animate-orbit-ccw,
+  .animate-marquee-left,
+  .animate-marquee-right,
+  .animate-parade,
+  .parade-bob-a,
+  .parade-bob-b,
+  .animate-shimmer,
+  .animate-text-shine,
+  .animate-wobble-8s,
+  .animate-bubble-rise,
+  .animate-roam-primary,
+  .animate-roam-secondary {
+    animation: none !important;
+  }
+}
